@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- TOPBAR (SAME STYLE AS HOME) -->
+<div class="topbar">
+    <div class="top-inner">
+        <div class="logo-center">
+            <h1>Photohome</h1>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCT PAGE -->
+<div class="product-page">
+
+    <div class="product-box">
+
+        <!-- IMAGE SLIDER -->
+        <div class="image-box">
+
+            <button class="nav left" onclick="prevImg()">‹</button>
+
+            <img id="mainImg">
+
+            <button class="nav right" onclick="nextImg()">›</button>
+
+        </div>
+
+        <!-- DETAILS -->
+        <div class="details-box">
+
+            <h2 id="name"></h2>
+            <p id="desc"></p>
+
+            <h2 id="price"></h2>
+
+            <button class="add-cart-btn" onclick="addToCart()">
+                🛒 Add To Cart
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* GET PRODUCT ID */
+let id = localStorage.getItem("product");
+
+/* PRODUCT DATABASE (NO CHANGE NEEDED) */
+let products = {
+frames:{name:"Frames",price:1599,desc:"Premium photo frames"},
+mirrorframes:{name:"Mirror Frames",price:2000,desc:"Elegant mirror frames"},
+whitemug:{name:"White Mug",price:799,desc:"Simple mug"},
+colourmug:{name:"Colour Mug",price:1099,desc:"Colorful mug"},
+heartmug:{name:"Heart Mug",price:1199,desc:"Love themed mug"},
+magicmug:{name:"Magic Mug",price:1199,desc:"Heat change mug"}
+};
+
+/* VALIDATION */
+let p = products[id];
+
+if(!p){
+document.body.innerHTML="<h2 style='text-align:center;margin-top:50px;color:red'>Product Not Found</h2>";
+throw new Error("Invalid Product");
+}
+
+/* TEXT */
+document.getElementById("name").innerText = p.name;
+document.getElementById("desc").innerText = p.desc;
+document.getElementById("price").innerText = "Rs " + p.price;
+
+/* IMAGE SLIDER */
+let images = [
+"images/"+id+"1.jpg",
+"images/"+id+"2.jpg"
+];
+
+let index = 0;
+let mainImg = document.getElementById("mainImg");
+mainImg.src = images[index];
+
+/* NEXT IMAGE */
+function nextImg(){
+    index++;
+    if(index >= images.length){
+        index = 0;
+    }
+    mainImg.src = images[index];
+}
+
+/* PREVIOUS IMAGE */
+function prevImg(){
+    index--;
+    if(index < 0){
+        index = images.length - 1;
+    }
+    mainImg.src = images[index];
+}
+
+/* ADD TO CART */
+function addToCart(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({
+name:p.name,
+price:p.price
+});
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+alert("Added to cart");
+}
+
+</script>
+
+</body>
+</html>

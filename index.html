@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photohome</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="top-inner">
+
+        <button class="cart-btn" onclick="location.href='cart.html'">
+            🛒 Cart
+        </button>
+
+        <div class="logo-center">
+            <h1>Photohome</h1>
+            <p>📞 03338181082 | 📧 photohome92@gmail.com</p>
+            <p>Premium Custom Products</p>
+        </div>
+
+        <div class="phone">
+            📞 03338181082
+        </div>
+
+    </div>
+</div>
+
+<div class="products">
+
+    <div class="card">
+        <img src="images/frames1.jpg">
+        <div class="info">
+            <h3>Frames</h3>
+            <p class="price">Rs 1599</p>
+            <button onclick="openProduct('frames')">View</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/mirrorframes1.jpg">
+        <div class="info">
+            <h3>Mirror Frames</h3>
+            <p class="price">Rs 2000</p>
+            <button onclick="openProduct('mirrorframes')">View</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/whitemug1.jpg">
+        <div class="info">
+            <h3>White Mug</h3>
+            <p class="price">Rs 799</p>
+            <button onclick="openProduct('whitemug')">View</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/colourmug1.jpg">
+        <div class="info">
+            <h3>Colour Mug</h3>
+            <p class="price">Rs 1099</p>
+            <button onclick="openProduct('colourmug')">View</button>
+        </div>
+    </div>
+
+</div>
+
+<footer>Photohome 92 © 2026</footer>
+
+<script>
+function openProduct(id){
+    localStorage.setItem("product",id);
+    location.href="product.html";
+}
+</script>
+
+</body>
+</html>

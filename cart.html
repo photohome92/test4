@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="top-inner">
+        <h2>Your Cart</h2>
+    </div>
+</div>
+
+<div class="container" id="box"></div>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let box=document.getElementById("box");
+let total=0;
+
+cart.forEach((c,i)=>{
+total+=c.price;
+
+box.innerHTML+=`
+<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #ddd;">
+<span>${c.name}</span>
+<span>Rs ${c.price}</span>
+</div>
+`;
+});
+
+box.innerHTML+=`
+<div style="padding:15px;font-size:18px;color:#f1c40f;">
+Total: Rs ${total}
+</div>
+
+<button onclick="order()" style="width:100%;padding:12px;background:#f1c40f;border:none;font-weight:bold;">
+Order on WhatsApp
+</button>
+`;
+
+function order(){
+
+let msg="🛒 Order:%0A%0A";
+
+cart.forEach((c,i)=>{
+msg+=(i+1)+". "+c.name+" - Rs "+c.price+"%0A";
+});
+
+msg+="%0A💰 Total: Rs "+total;
+
+window.open("https://wa.me/923338181082?text="+msg);
+}
+
+</script>
+
+</body>
+</html>
